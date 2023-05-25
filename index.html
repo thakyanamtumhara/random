@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <button onclick="download(myurl,'myd1.csv')">myd1</button>
+    <button onclick="download(myurl2,'myd1.csv')">myd12</button>
+    <hr>
+    <button onclick="download1(myurl,'myd1.csv')">myd1</button>
+    <button onclick="download1(myurl2,'myd1.csv')">myd12</button>
+    <hr>
+    <button onclick="dfile1(myurl,'myd1.csv')">myd1</button>
+    <button onclick="dfile1(myurl2,'myd1.csv')">myd12</button>
+    <hr>
+    <button onclick="dfile(myurl,'myd1.csv')">myd1</button>
+    <button onclick="dfile(myurl2,'myd1.csv')">myd12</button>
+     <hr>
+    <a id="alink1" download="df1.csv">df1</a>
+     <hr>
+    <a id="alink2" download="df2.csv">df2</a>
+  </body>
+  <script>
+    let city=["Aberdeen", "Abilene", "Akron", "Albany", "Albuquerque", "Alexandria", "Allentown", "Amarillo", "Anaheim", "Anchorage", "Ann Arbor", "Antioch", "Apple Valley", "Appleton", "Arlington", "Arvada", "Asheville", "Athens", "Atlanta", "Atlantic City", "Augusta-Richmond County", "Aurora", "Austin", "Bakersfield", "Baltimore", "Barnstable Town", "Baton Rouge", "Beaumont", "Bel Air South", "Bellevue", "Berkeley", "Bethlehem", "Billings", "Birmingham", "Bismarck", "Blacksburg-Christiansburg-Radford","Bloomington","Boise City","Boston","Boulder","Bowling Green","Bridgeport-Stamford-Norwalk","Brownsville-Harlingen","Buffalo-Cheektowaga-Niagara Falls","Burlington-South Burlington","Canton-Massillon","Cape Coral-Fort Myers","Cape Girardeau","Carbondale-Marion","Carson City","Casper","Cedar Rapids","Champaign-Urbana","Charleston-North Charleston","Charlotte-Concord-Gastonia","Charlottesville","Chattanooga","Cheyenne","Chicago-Naperville-Elgin","Chico","Cincinnati","Clarksville-Montgomery County"];
+
+let myurl=URL.createObjectURL(new Blob([city], { type: 'text/csv;charset=utf-8'}));
+let myurl2='data:text/csv;charset=UTF-8,'+ encodeURIComponent(city);
+document.getElementById('alink1').href=myurl;
+document.getElementById('alink2').href=myurl2;
+function download(imgurl,imgnm){
+  let htl="<a id='link55' href='"+imgurl+"' download='"+imgnm+"'>Download</a>";
+  let iframe = document.createElement('iframe');
+  document.head.appendChild(iframe);
+  let doc=iframe.contentWindow.document;
+  doc.open();
+  doc.write(htl);
+  doc.getElementById('link55').click();
+  doc.close();
+   setTimeout(()=> iframe.remove(), 1000);
+  }
+
+
+  function download1(link,name){
+    let iframe = document.createElement('iframe');  
+    document.head.appendChild(iframe);
+    let doc=iframe.contentWindow.document; // target='_self'(Default) target='_parent' target='_top' target='framename'
+    doc.write("<a id='link55' target='_blank' href='"+link+"' download='"+name+"'>Download</a>");
+    doc.getElementById('link55').click();
+    setTimeout(()=> iframe.remove(), 1000);
+    }
+
+    function dfile1(link,name){
+      let iframe = document.createElement("iframe");
+      document.head.appendChild(iframe);
+      let doc=iframe.contentWindow.document; 
+      doc.write(`<a id="link55" href="${link}" download="${name}"></a>`);
+      doc.getElementById("link55").click();
+      setTimeout(()=> iframe.remove(), 1000);
+      }
+
+    function dfile(url,nm){
+      let htl=`<a id="link55" href="${url}" download="${nm}"></a>`;
+      let iframe = document.createElement("iframe");
+      document.head.appendChild(iframe);
+      let docx=iframe.contentWindow.document;
+      docx.open();
+      docx.write(htl);
+      docx.getElementById("link55").click();
+      docx.close();
+       setTimeout(()=> iframe.remove(), 1000);
+    }
+
+  </script>
+</html>
